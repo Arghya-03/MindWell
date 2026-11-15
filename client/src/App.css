@@ -1877,3 +1877,25 @@
         padding: 16px;
     }
 }
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  background: rgba(220, 80, 80, 0.08);
+  border-color: #dc6464;
+  color: #dc6464;
+}

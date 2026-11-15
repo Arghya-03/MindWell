@@ -221,7 +221,20 @@ Protected endpoints require a valid JWT bearer token.
 
 ## Screenshots
 
-Application screenshots and database encryption evidence will be added here.
+### 1. MindWell Dashboard
+![MindWell Dashboard](screenshots/dashboard.png)
+
+### 2. Secure Journal
+![Journal Page](screenshots/journal.png)
+
+### 3. Mood Analytics
+![Mood Analytics](screenshots/mood-analytics.png)
+
+### 4. Breathing Assistant
+![Breathing Assistant](screenshots/breathing-assistant.png)
+
+### 5. MongoDB Encryption Evidence
+![Encrypted Journal Data](screenshots/mongodb-encryption.png)
 
 ## Future Improvements
 

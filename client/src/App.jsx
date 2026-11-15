@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Leaf,
   Menu,
+  LogOut,
 } from "lucide-react";
 import Auth from "./pages/Auth";
 import API from "./services/api";
@@ -47,6 +48,15 @@ function App() {
 
   const handleLogin = (userData) => {
     setUser(userData);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("mindwell_token");
+    localStorage.removeItem("mindwell_user");
+
+    setUser(null);
+
+    window.location.replace("/");
   };
 
 
@@ -267,7 +277,21 @@ function App() {
                         {darkMode ? <Sun size={19} /> : <Moon size={19} />}
                       </button>
 
-                      <div className="profile-avatar">A</div>
+                      <div className="profile-avatar">
+                        {user?.name?.charAt(0).toUpperCase() || "U"}
+                      </div>
+
+                      <button
+                        type="button"
+                        className="logout-button"
+                        onClick={handleLogout}
+                        title="Logout"
+                        aria-label="Logout"
+                      >
+                        <LogOut size={18} />
+                        <span>Logout</span>
+                      </button>
+
                       <button className="mobile-menu" aria-label="Open menu">
                         <Menu size={22} />
                       </button>
