@@ -17,17 +17,47 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    // Validate input types and required fields
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !name.trim() ||
+      !email.trim() ||
+      !password
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Please provide name, email and password",
+        message: "Please provide valid name, email and password",
       });
     }
 
-    if (password.length < 8) {
+    // Validate name length
+    if (name.trim().length > 100) {
       return res.status(400).json({
         success: false,
-        message: "Password must contain at least 8 characters",
+        message: "Name cannot exceed 100 characters",
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email.trim())) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide a valid email address",
+      });
+    }
+
+    // Validate password length
+    if (
+      password.length < 8 ||
+      Buffer.byteLength(password, "utf8") > 72
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must contain between 8 and 72 characters",
       });
     }
 
@@ -87,10 +117,22 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email.trim() ||
+      !password
+    ) {
       return res.status(400).json({
         success: false,
-        message: "Please provide email and password",
+        message: "Please provide valid email and password",
+      });
+    }
+
+    if (Buffer.byteLength(password, "utf8") > 72) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email or password",
       });
     }
 
@@ -138,7 +180,6 @@ exports.login = async (req, res) => {
     });
   }
 };
-
 
 // GET LOGGED-IN USER PROFILE
 exports.getMe = async (req, res) => {
